@@ -1,17 +1,19 @@
 import facebook
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 
 
+def get_graph(request):
+    return facebook.GraphAPI(access_token=request.user.social_auth.get().access_token)
+
 @login_required
 def list_events(request):
-    events = \
-    facebook.GraphAPI(request.user.social_auth.get().access_token).get_connections(id="me", connection_name="events")[
-        "data"]
+    events = get_graph(request).get_connections(id="me", connection_name="events")["data"]
     return render(request, "plansza/list_events.html", {"events": events})
 
 
 @login_required
 def event_details(request, ident):
-    return HttpResponse("ej cześć siema tu nic nie ma")
+    event = get_graph(request).get_object(id=ident)
+    return JsonResponse(event)
