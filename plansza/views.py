@@ -23,7 +23,7 @@ def list_events(request):
     for event in events:
         ensure_event_import(get_graph(request.user), event["id"])
     allev = Event.objects.filter(facebook_id__in=[int(event["id"]) for event in events]).exclude(hidden=True).order_by(
-        "time", "?")
+        "start_time", "end_time", "?")
     return render(request, "plansza/list_events.html",
                   {"events": allev, "upcoming": allev.filter(start_time__gt=timezone.now()),
                    "ongoing": allev.filter(start_time__lte=timezone.now(), end_time__gte=timezone.now())})
