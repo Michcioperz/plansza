@@ -129,7 +129,7 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_FACEBOOK_KEY = '932417510172288'
 SOCIAL_AUTH_FACEBOOK_SECRET = '4b166115a6f3cd8cdd7e42e4f26cd7ac'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ('email', 'user_friends', 'user_events', 'rsvp_event')
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_friends', 'user_events', 'rsvp_event']
 
 LOGIN_REDIRECT_URL = "list_events"
 LOGIN_URL = reverse_lazy("social:begin", args=("facebook",))
