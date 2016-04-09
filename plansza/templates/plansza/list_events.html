@@ -11,7 +11,7 @@
               <span class="card-title truncate">{{ event.name }}</span>
             </div>
             <div class="card-content">
-              <p>{{ event.description | truncatewords_html: 50 }}</p>
+              <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
               <a href="{% url "event_details" event.id %}">Przejrzyj</a>
