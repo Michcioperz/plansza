@@ -27,6 +27,7 @@ class Event(models.Model):
     def serious_hours(self):
         return self.hours.order_by("time")
 
+
 class EventHour(models.Model):
     event = models.ForeignKey(Event, related_name="hours")
     users = models.ManyToManyField(User, related_name="hours", blank=True)
