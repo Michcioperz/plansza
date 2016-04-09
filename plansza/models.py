@@ -27,6 +27,9 @@ class Friend(models.Model):
     user = models.OneToOneField(User, related_name="friend")
     friends = models.ManyToManyField("self", symmetrical=True)
 
+    def __str__(self):
+        return self.user.username
+
     def update(self):
         with transaction.atomic():
             # TODO: this may not work for more than 15 or so friends
