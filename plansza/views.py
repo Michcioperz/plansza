@@ -15,7 +15,7 @@ def ensure_event_import(request, ident):
         Event.objects.get(facebook_id=int(ident))
     except Event.DoesNotExist:
         event = get_graph(request).get_object(id=ident)
-        image = get_graph(request).get_connections(ident, "picture")
+        image = get_graph(request).get_connections(id=ident, connection_name="picture", type="large")
         Event.objects.create(name=event["name"], description=event["description"], facebook_id=int(event["id"]), image=(
             image["url"] if "url" in image else requests.head("https://source.unsplash.com/category/people/1500x550",
                                                               allow_redirects=True).url))
