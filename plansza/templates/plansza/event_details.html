@@ -1,6 +1,9 @@
 {% extends "plansza/core.html" %}
 {% block title %}{{ event.name }} | Poplanszówkujemy{% endblock title %}
 {% block body %}
-  <h1>{{ event.name }}</h1>
+  <div class="parallax-container">
+    <div class="parallax"><img src="{{ event.image }}"/></div>
+    <h1>{{ event.name }}</h1>
+  </div>
   <blockquote>{{ event.description }}</blockquote>
 {% endblock body %}

@@ -4,7 +4,7 @@ from django.db import models
 
 class Event(models.Model):
     name = models.CharField(max_length=255)
-    facebook_id = models.BigIntegerField(null=True, blank=True)
+    facebook_id = models.BigIntegerField(null=True, blank=True, unique=True)
     description = models.TextField(null=True, blank=True)
 
 
