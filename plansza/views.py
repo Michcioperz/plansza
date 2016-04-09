@@ -1,3 +1,4 @@
+import arrow
 import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
@@ -35,4 +36,6 @@ def ensure_event_import(graph, ident: str):
         Event.objects.create(name=event["name"], description=event["description"], facebook_id=int(event["id"]),
                              facebook_data=event, image=(
             image["url"] if "url" in image else requests.head("https://source.unsplash.com/category/people/1500x550",
-                                                              allow_redirects=True).url))
+                                                              allow_redirects=True).url),
+                             start_time=arrow.get(event["start_time"]).datetime,
+                             end_time=arrow.get(event["end_time"]).datetime)
