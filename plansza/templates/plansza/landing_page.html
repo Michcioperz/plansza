@@ -1,0 +1,9 @@
+{% extends "plansza/core.html" %}
+{% block body %}
+  <h1>Koniec z samotnością na konwentach</h1>
+  <p class="flow-text">Dzięki nam łatwo i szybko ustalisz <strong>kogo z Twoich znajomych</strong> i
+    <strong>kiedy</strong> szukać na konwentach i konferencjach.</p>
+  {% if request.user.is_authenticated %}
+    <a class="btn btn-large blue" href="{% url "social:begin" "facebook" %}">Zaloguj z Facebookiem</a>{% else %}
+    <a class="btn-large green" href="{% url "list_events" %}">Przejrzyj swoje wydarzenia</a>{% endif %}
+{% endblock body %}

@@ -16,3 +16,7 @@ def list_events(request):
 def event_details(request, ident):
     event = get_graph(request).get_object(id=ident)
     return render(request, "plansza/event_details.html", {"event": event})
+
+
+def landing_page(request):
+    return render(request, "plansza/landing_page.html")
