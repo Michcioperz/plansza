@@ -1,5 +1,6 @@
 django
 requests
+pytz
 python-social-auth
 psycopg2
 facebook-sdk

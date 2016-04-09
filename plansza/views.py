@@ -26,6 +26,7 @@ def landing_page(request):
 
 
 def ensure_event_import(graph, ident: str):
+    # TODO: maybe we could make that threaded
     try:
         Event.objects.get(facebook_id=int(ident))
     except Event.DoesNotExist:

@@ -1,3 +1,4 @@
+import arrow
 import requests
 from django.contrib.auth import user_logged_in
 from django.contrib.auth.models import User
@@ -53,6 +54,10 @@ def friend_reroll(sender, request, user, **kwargs):
 
 @receiver(post_save, sender=Event)
 def generate_hours(sender, instance, created, **kwargs):
-    if instance.facebook_data and instance.hours.count() < 1:
-        # TODO: yes, soon
+    if len(instance.facebook_data.keys()) and instance.hours.count() < 1:
+        start = arrow.get(instance.facebook_data["start_time"])
+        end = arrow.get(instance.facebook_data["end_time"])
+        while start < end:
+            EventHour.objects.create(event=instance, time=start)
+            start.replace(hours=+0.5)
         pass
