@@ -1,4 +1,5 @@
 {% extends "plansza/core.html" %}
+{% load midnightstuff %}
 {% block title %}{{ event.name }} | Poplanszówkujemy{% endblock title %}
 {% block body %}
   <div class="container">
@@ -6,10 +7,14 @@
     <h1>{{ event.name }}</h1>
     <blockquote>{{ event.description }}</blockquote>
   </div>
-  <div class="container">
+  <div class="container row">
     {% for hour in event.serious_hours %}
-      <div class="card-panel">
-        <p class="flow-text">{{ hour.time | date:"d.m H:i" }}</p>
+      <div class="col s12 m6 l4">
+        <div class="card-panel">
+          {% if request.user|belongs_to:hour.users %}<a class="btn-floating red">-</a>{% else %}
+            <a class="btn-floating green">+</a>{% endif %}
+          <p class="flow-text">{{ hour.time | date:"d.m H:i" }}</p>
+        </div>
       </div>
     {% endfor %}
   </div>
