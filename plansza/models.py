@@ -1,6 +1,8 @@
 import requests
+from django.contrib.auth import user_logged_in
 from django.contrib.auth.models import User
 from django.db import models, transaction
+from django.dispatch import receiver
 
 from .utils import get_graph
 
@@ -31,3 +33,12 @@ class Friend(models.Model):
             self.friends = [Friend.objects.get(user__social_auth__uid=x["id"]) for x in
                             get_graph(self.user).get_connections("me", "friends")["data"]]
             self.save()
+
+
+@receiver(user_logged_in)
+def friend_reroll(sender, request, user, **kwargs):
+    try:
+        f = user.friend
+    except:
+        f = Friend.objects.create(user=user)
+    f.update()
