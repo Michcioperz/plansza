@@ -28,6 +28,6 @@ class Friend(models.Model):
     def update(self):
         with transaction.atomic():
             # TODO: this may not work for more than 15 or so friends
-            self.friends = [Friend.objects.get(user__social_auth__uid=x) for x in
-                            get_graph(self.user).get_connections("me", "friends")]
+            self.friends = [Friend.objects.get(user__social_auth__uid=x["id"]) for x in
+                            get_graph(self.user).get_connections("me", "friends")["data"]]
             self.save()
