@@ -15,4 +15,4 @@ def list_events(request):
 @login_required
 def event_details(request, ident):
     event = get_graph(request).get_object(id=ident)
-    return render(request, "plansza/event_details.html")
+    return render(request, "plansza/event_details.html", {"event": event})
