@@ -21,6 +21,8 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True)
     image = models.URLField(default=get_random_photo)
 
+    def serious_hours(self):
+        return self.hours.order_by("time")
 
 class EventHour(models.Model):
     event = models.ForeignKey(Event, related_name="hours")

@@ -1,10 +1,24 @@
 {% extends "plansza/core.html" %}
 {% block body %}
   <div class="container">
-    <ul>
+    <h3>Wszystkie wydarzenia na FB, w których bierzesz udział</h3>
+    <div class="row">
       {% for event in events %}
-        <li><a href="{% url "event_details" event.id %}">{{ event.name }}</a></li>
+        <div class="col s12 m6 l4">
+          <div class="card hoverable">
+            <div class="card-image">
+              <img src="{{ event.image }}"/>
+              <span class="card-title truncate">{{ event.name }}</span>
+            </div>
+            <div class="card-content">
+              <p>{{ event.description | truncatewords_html: 50 }}</p>
+            </div>
+            <div class="card-action">
+              <a href="{% url "event_details" event.id %}">Przejrzyj</a>
+            </div>
+          </div>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
   </div>
 {% endblock body %}
