@@ -15,8 +15,8 @@ def list_events(request):
     qloader = Q(False)
     for event in events:
         ensure_event_import(get_graph(request.user), event["id"])
-        event |= Q(facebook_id=int(event["id"]))
-    return render(request, "plansza/list_events.html", {"events": Event.objects.filter(qloader).exclude(hidden=True)})
+    return render(request, "plansza/list_events.html", {
+        "events": Event.objects.filter(facebook_id__in=[event["id"] for event in events]).exclude(hidden=True)})
 
 
 @login_required
