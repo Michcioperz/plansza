@@ -1,8 +1,9 @@
+import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
 from .models import Event
-from .utils import get_graph, ensure_event_import
+from .utils import get_graph
 
 
 @login_required
@@ -22,3 +23,14 @@ def event_details(request, ident: str):
 
 def landing_page(request):
     return render(request, "plansza/landing_page.html")
+
+
+def ensure_event_import(graph, ident: str):
+    try:
+        Event.objects.get(facebook_id=int(ident))
+    except Event.DoesNotExist:
+        event = graph.get_object(id=ident)
+        image = graph.get_connections(id=ident, connection_name="picture", type="large")
+        Event.objects.create(name=event["name"], description=event["description"], facebook_id=int(event["id"]), image=(
+            image["url"] if "url" in image else requests.head("https://source.unsplash.com/category/people/1500x550",
+                                                              allow_redirects=True).url))
