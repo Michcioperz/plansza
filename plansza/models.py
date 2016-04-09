@@ -60,8 +60,8 @@ def friend_reroll(sender, request, user, **kwargs):
 @receiver(post_save, sender=Event)
 def generate_hours(sender, instance, created, **kwargs):
     if len(instance.facebook_data.keys()) and instance.hours.count() < 1:
-        start = arrow.get(instance.facebook_data["start_time"])
-        end = arrow.get(instance.facebook_data["end_time"])
+        start = arrow.get(instance.start_time)
+        end = arrow.get(instance.end_time)
         while start < end:
             EventHour.objects.create(event=instance, time=start.datetime)
             start = start.replace(hours=+0.5)
