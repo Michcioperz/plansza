@@ -25,7 +25,6 @@ SECRET_KEY = '_xx7ykcmm(rq@s+55vf2ma5rd6jhwt&menz5+^)b7kwbd0r3zq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -58,8 +57,8 @@ ROOT_URLCONF = 'plansza.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        "DEBUG": True,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
