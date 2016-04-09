@@ -12,7 +12,7 @@ from .utils import get_graph
 def list_events(request):
     events = []
     eloader = get_graph(request.user).get_connections(id="me", connection_name="events")["data"]
-    qloader = Q(facebook_id=-1)
+    qloader = Q(False)
     for event in events:
         ensure_event_import(get_graph(request.user), event["id"])
         event |= Q(facebook_id=int(event["id"]))
