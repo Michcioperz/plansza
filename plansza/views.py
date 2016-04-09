@@ -35,7 +35,9 @@ def ensure_event_import(graph, ident: str):
         image = graph.get_connections(id=ident, connection_name="picture", type="large")
         Event.objects.create(name=event["name"], description=event["description"], facebook_id=int(event["id"]),
                              facebook_data=event, image=(
-            image["url"] if "url" in image else requests.head("https://source.unsplash.com/category/people/1500x550",
-                                                              allow_redirects=True).url),
+                image["url"] if "url" in image else requests.head(
+                    "https://source.unsplash.com/category/people/1500x550",
+                    allow_redirects=True).url),
                              start_time=arrow.get(event["start_time"]).datetime,
-                             end_time=arrow.get(event["end_time"]).datetime)
+                             end_time=arrow.get(event.get("end_time", event["start_time"])).datetime,
+                             hidden=(event["start_time"] == event.get("end_time", event["start_time"])))

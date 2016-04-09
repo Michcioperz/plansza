@@ -22,6 +22,7 @@ class Event(models.Model):
     image = models.URLField(default=get_random_photo)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    hidden = models.BooleanField(default=False)
 
     def serious_hours(self):
         return self.hours.order_by("time")
