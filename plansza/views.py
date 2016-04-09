@@ -1,6 +1,5 @@
 import facebook
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 from django.shortcuts import render
 
 
@@ -16,4 +15,4 @@ def list_events(request):
 @login_required
 def event_details(request, ident):
     event = get_graph(request).get_object(id=ident)
-    return JsonResponse(event)
+    return render(request, "plansza/event_details.html")
