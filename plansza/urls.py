@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$', views.list_events, name="list_events"),
+    url(r'^e/(?P<ident>\d+)/$', views.event_details, name="event_details"),
 ]
