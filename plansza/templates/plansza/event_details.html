@@ -11,8 +11,9 @@
     {% for hour in event.serious_hours %}
       <div class="col s12 m6 l4">
         <div class="card-panel">
-          {% if request.user|belongs_to:hour.users %}<a class="btn-floating red">-</a>{% else %}
-            <a class="btn-floating green">+</a>{% endif %}
+          {% if request.user|belongs_to:hour.users.all %}
+            <a class="btn-floating red"><i class="material-icons">remove</i></a>{% else %}
+            <a class="btn-floating green"><i class="material-icons">add</i></a>{% endif %}
           <p class="flow-text">{{ hour.time | date:"d.m H:i" }}</p>
         </div>
       </div>
