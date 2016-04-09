@@ -14,7 +14,7 @@
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
-              <a href="{% url "event_details" event.id %}">Przejrzyj</a>
+              <a href="{% url "event_details" event.facebook_id %}">Przejrzyj</a>
             </div>
           </div>
         </div>
