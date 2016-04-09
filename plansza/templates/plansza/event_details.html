@@ -1,7 +1,9 @@
 {% extends "plansza/core.html" %}
 {% block title %}{{ event.name }} | Poplanszówkujemy{% endblock title %}
 {% block body %}
-  <h1>{{ event.name }}</h1>
-  <img src="{{ event.image }}" class="right circle"/>
-  <blockquote>{{ event.description }}</blockquote>
+  <div class="container">
+    <img src="{{ event.image }}" class="right circle"/>
+    <h1>{{ event.name }}</h1>
+    <blockquote>{{ event.description }}</blockquote>
+  </div>
 {% endblock body %}

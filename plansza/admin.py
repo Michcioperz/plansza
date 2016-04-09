@@ -15,4 +15,4 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(EventHour)
 class EventHourAdmin(admin.ModelAdmin):
-    list_display = ("event", "users")
+    list_display = ("event",)
