@@ -2,6 +2,7 @@ import arrow
 import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 
 from .models import Event
 from .utils import get_graph
@@ -21,8 +22,11 @@ def list_events(request):
         pass
     for event in events:
         ensure_event_import(get_graph(request.user), event["id"])
-    return render(request, "plansza/list_events.html", {
-        "events": Event.objects.filter(facebook_id__in=[int(event["id"]) for event in events]).exclude(hidden=True)})
+    allev = Event.objects.filter(facebook_id__in=[int(event["id"]) for event in events]).exclude(hidden=True).order_by(
+        "time", "?")
+    return render(request, "plansza/list_events.html",
+                  {"events": allev, "upcoming": allev.filter(start_time__gt=timezone.now()),
+                   "ongoing": allev.filter(start_time__lte=timezone.now(), end_time__gte=timezone.now())})
 
 
 @login_required

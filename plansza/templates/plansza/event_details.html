@@ -12,9 +12,12 @@
       <div class="col s12 m6 l4">
         <div class="card-panel">
           {% if request.user|belongs_to:hour.users.all %}
-            <a class="btn-floating red"><i class="material-icons">remove</i></a>{% else %}
-            <a class="btn-floating green"><i class="material-icons">add</i></a>{% endif %}
-          <p class="flow-text">{{ hour.time | date:"d.m H:i" }}</p>
+            <a class="btn-floating waves-effect left red"><i class="material-icons">remove</i></a>{% else %}
+            <a class="btn-floating waves-effect left green"><i class="material-icons">add</i></a>{% endif %}
+          <p>{{ hour.time | date:"d.m H:i" }}</p>
+          <div class="friends right">
+            {# FIXME #}
+          </div>
         </div>
       </div>
     {% endfor %}
