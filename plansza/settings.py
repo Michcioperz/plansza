@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'plansza',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -118,3 +119,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.getenv("VENVDIR", BASE_DIR), "static")
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '932417510172288'
+SOCIAL_AUTH_FACEBOOK_SECRET = '4b166115a6f3cd8cdd7e42e4f26cd7ac'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_friends', 'user_events', 'rsvp_event']
