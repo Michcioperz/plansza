@@ -58,6 +58,5 @@ def generate_hours(sender, instance, created, **kwargs):
         start = arrow.get(instance.facebook_data["start_time"])
         end = arrow.get(instance.facebook_data["end_time"])
         while start < end:
-            EventHour.objects.create(event=instance, time=start)
-            start.replace(hours=+0.5)
-        pass
+            EventHour.objects.create(event=instance, time=start.timestamp)
+            start = start.replace(hours=+0.5)
