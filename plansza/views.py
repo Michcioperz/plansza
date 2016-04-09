@@ -11,11 +11,14 @@ from .utils import get_graph
 def list_events(request):
     events = []
     eloader = get_graph(request.user).get_connections(id="me", connection_name="events")
-    while True:
-        events += eloader["data"]
-        if len(eloader["data"]) <= 0 or "next" not in eloader["paging"]:
-            break
-        eloader = requests.get(eloader["paging"]["next"]).json()
+    try:
+        while True:
+            events += eloader["data"]
+            if len(eloader["data"]) < 25:
+                break
+            eloader = requests.get(eloader["paging"]["next"]).json()
+    except KeyError:
+        pass
     for event in events:
         ensure_event_import(get_graph(request.user), event["id"])
     return render(request, "plansza/list_events.html", {
