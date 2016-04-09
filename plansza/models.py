@@ -24,7 +24,7 @@ class Event(models.Model):
 
 class EventHour(models.Model):
     event = models.ForeignKey(Event, related_name="hours")
-    users = models.ManyToManyField(User, related_name="hours", null=True, blank=True)
+    users = models.ManyToManyField(User, related_name="hours", blank=True)
     time = models.DateTimeField()
 
 
