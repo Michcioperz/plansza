@@ -1,6 +1,7 @@
 import arrow
 import requests
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
 from .models import Event
@@ -9,10 +10,13 @@ from .utils import get_graph
 
 @login_required
 def list_events(request):
-    events = get_graph(request.user).get_connections(id="me", connection_name="events")["data"]
+    events = []
+    eloader = get_graph(request.user).get_connections(id="me", connection_name="events")["data"]
+    qloader = Q(facebook_id=-1)
     for event in events:
         ensure_event_import(get_graph(request.user), event["id"])
-    return render(request, "plansza/list_events.html", {"events": events})
+        event |= Q(facebook_id=int(event["id"]))
+    return render(request, "plansza/list_events.html", {"events": Event.objects.filter(qloader).exclude(hidden=True)})
 
 
 @login_required
