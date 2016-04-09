@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'plansza',
     'social.apps.django_app.default',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE_CLASSES = [
