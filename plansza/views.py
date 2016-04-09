@@ -31,6 +31,7 @@ def ensure_event_import(graph, ident: str):
     except Event.DoesNotExist:
         event = graph.get_object(id=ident)
         image = graph.get_connections(id=ident, connection_name="picture", type="large")
-        Event.objects.create(name=event["name"], description=event["description"], facebook_id=int(event["id"]), image=(
+        Event.objects.create(name=event["name"], description=event["description"], facebook_id=int(event["id"]),
+                             facebook_data=event, image=(
             image["url"] if "url" in image else requests.head("https://source.unsplash.com/category/people/1500x550",
                                                               allow_redirects=True).url))

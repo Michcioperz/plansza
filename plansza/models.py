@@ -2,7 +2,9 @@ import requests
 from django.contrib.auth import user_logged_in
 from django.contrib.auth.models import User
 from django.db import models, transaction
+from django.db.models.signals import post_save
 from django.dispatch import receiver
+from social.apps.django_app.default.fields import JSONField
 
 from .utils import get_graph
 
@@ -14,6 +16,7 @@ def get_random_photo() -> str:
 class Event(models.Model):
     name = models.CharField(max_length=255)
     facebook_id = models.BigIntegerField(null=True, blank=True, unique=True)
+    facebook_data = JSONField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     image = models.URLField(default=get_random_photo)
 
@@ -21,6 +24,7 @@ class Event(models.Model):
 class EventHour(models.Model):
     event = models.ForeignKey(Event, related_name="hours")
     users = models.ManyToManyField(User, related_name="hours")
+    time = models.DateTimeField()
 
 
 class Friend(models.Model):
@@ -45,3 +49,10 @@ def friend_reroll(sender, request, user, **kwargs):
     except:
         f = Friend.objects.create(user=user)
     f.update()
+
+
+@receiver(post_save, sender=Event)
+def generate_hours(sender, instance, created, **kwargs):
+    if instance.facebook_data and instance.hours.count() < 1:
+        # TODO: yes, soon
+        pass
