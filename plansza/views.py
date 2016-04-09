@@ -1,7 +1,6 @@
 import arrow
 import requests
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
 from .models import Event
@@ -11,8 +10,12 @@ from .utils import get_graph
 @login_required
 def list_events(request):
     events = []
-    eloader = get_graph(request.user).get_connections(id="me", connection_name="events")["data"]
-    qloader = Q(False)
+    eloader = get_graph(request.user).get_connections(id="me", connection_name="events")
+    while True:
+        events += eloader["data"]
+        if len(eloader["data"]) <= 0 or "next" not in eloader["paging"]:
+            break
+        eloader = requests.get(eloader["paging"]["next"]).json()
     for event in events:
         ensure_event_import(get_graph(request.user), event["id"])
     return render(request, "plansza/list_events.html", {
