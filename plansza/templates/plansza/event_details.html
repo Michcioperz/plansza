@@ -6,4 +6,11 @@
     <h1>{{ event.name }}</h1>
     <blockquote>{{ event.description }}</blockquote>
   </div>
+  <div class="container">
+    {% for hour in event.serious_hours %}
+      <div class="card-panel">
+        <p class="flow-text">{{ hour.time | date:"d.m H:i" }}</p>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock body %}
