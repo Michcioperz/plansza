@@ -10,14 +10,14 @@
   {% block head %}{% endblock head %}
 </head>
 <body class="white black-text">
+{% block nav %}
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center" href="{% url "landing_page" %}">Poplanszówkujemy</a>
+    </div>
+  </nav>
+{% endblock nav %}
 <div class="container">
-  {% block nav %}
-    <nav>
-      <div class="nav-wrapper">
-        <a class="brand-logo" href="{% url "landing_page" %}">Poplanszówkujemy</a>
-      </div>
-    </nav>
-  {% endblock nav %}
   {% block body %}{% endblock body %}
 </div>
 </body>

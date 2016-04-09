@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.core.urlresolvers import reverse_lazy
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -130,3 +132,6 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_FACEBOOK_KEY = '932417510172288'
 SOCIAL_AUTH_FACEBOOK_SECRET = '4b166115a6f3cd8cdd7e42e4f26cd7ac'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_friends', 'user_events', 'rsvp_event']
+
+LOGIN_REDIRECT_URL = "list_events"
+LOGIN_URL = reverse_lazy("social:begin", args=("facebook",))
