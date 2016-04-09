@@ -22,7 +22,7 @@ class EventHour(models.Model):
 
 
 class Friend(models.Model):
-    user = models.ForeignKey(User, related_name="friend")
+    user = models.OneToOneField(User, related_name="friend")
     friends = models.ManyToManyField("self", symmetrical=True)
 
     def update(self):
