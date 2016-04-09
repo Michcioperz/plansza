@@ -1,7 +1,7 @@
 import facebook
 import requests
 
-from plansza.models import Event
+from .models import Event
 
 
 def get_graph(user) -> facebook.GraphAPI:
