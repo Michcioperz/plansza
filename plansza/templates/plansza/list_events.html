@@ -1,4 +1,5 @@
 {% extends "plansza/core.html" %}
+{% load humanize %}
 {% block body %}
   <div class="container">
     <h3>Trwające wydarzenia</h3>
@@ -11,6 +12,7 @@
               <span class="card-title truncate">{{ event.name }}</span>
             </div>
             <div class="card-content">
+              <p>kończy się {{ event.end_time|naturaltime }}</p>
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
