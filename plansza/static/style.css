@@ -18,3 +18,7 @@ nav img {
   max-height: 100%;
   padding: 5px;
 }
+
+body {
+  font-family: "Helvetica Neue", "Lato", "Roboto", sans-serif;
+}
