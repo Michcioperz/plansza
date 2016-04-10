@@ -18,8 +18,8 @@
   <nav>
     <div class="nav-wrapper">
       <a class="brand-logo center" href="{% url "landing_page" %}">Poplanszówkujemy</a>
-      <img class="responsive-img circle right"
-           src="{% firstof request.user.friend.image request.user|placeholder_avatar %}"/>
+      {% if request.user.is_authenticated %}<img class="responsive-img circle right"
+                                                 src="{% firstof request.user.friend.image request.user|placeholder_avatar %}"/>{% endif %}
       <ul class="right">
         {% if request.user.is_staff %}
           <li><a href="{% url "admin:index" %}">Panel administracyjny</a></li>{% endif %}
