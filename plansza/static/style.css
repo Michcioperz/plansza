@@ -6,3 +6,7 @@
 .magical-button {
   margin-right: 1em;
 }
+
+.friends img {
+  max-height: 100%;
+}

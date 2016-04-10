@@ -17,9 +17,9 @@
             <a class="btn-floating waves-effect left magical-button green"><i
                 class="material-icons">add</i></a>{% endif %}
           <p>{{ hour.time | date:"d.m H:i" }}</p>
-          <div class="friends right">
+          <div class="friends right chip">
             {% for friend in request.user|s_friends_in:hour %}
-              <img src="{% firstof friend.friend.image friend|placeholder_avatar %}"
+              <img class="responsive-img" src="{% firstof friend.friend.image friend|placeholder_avatar %}"
                    alt="{{ friend.get_full_name }}"/>{% endfor %}
           </div>
         </div>
