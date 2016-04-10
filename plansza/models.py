@@ -37,6 +37,7 @@ class EventHour(models.Model):
 class Friend(models.Model):
     user = models.OneToOneField(User, related_name="friend")
     friends = models.ManyToManyField("self", symmetrical=True)
+    image = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -46,6 +47,7 @@ class Friend(models.Model):
             # TODO: this may not work for more than 15 or so friends
             self.friends = [Friend.objects.get(user__social_auth__uid=x["id"]) for x in
                             get_graph(self.user).get_connections("me", "friends")["data"]]
+            self.image = get_graph(self.user).get_connections("me", "picture", type="large")["url"]
             self.save()
 
 
