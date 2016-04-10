@@ -20,6 +20,7 @@
                 <time datetime="{{ event.end_time|date:"c" }}"
                       title="{{ event.end_time|date:"SHORT_DATE_FORMAT" }}">{{ event.end_time|naturaltime }}</time>
               </strong>
+              <hr/>
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
@@ -43,6 +44,7 @@
                 <time datetime="{{ event.start_time|date:"c" }}"
                       title="{{ event.start_time|date:"SHORT_DATE_FORMAT" }}">{{ event.start_time|naturaltime }}</time>
               </strong>
+              <hr/>
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
@@ -52,21 +54,21 @@
         </div>
       {% endfor %}
     </div>
-    <h3>Wszystkie związane z Tobą wydarzenia na FB</h3>
+    <h3>Poprzednie wydarzenia</h3>
     <div class="collection">
       {% for event in events %}
         <li class="collection-item avatar">
           <img src="{{ event.image }}" class="circle"/>
           <a class="title" href="{% url "event_details" event.facebook_id %}">{{ event.name }}</a>
-          <p><strong>zaczyna się
+          <p><strong>zaczęło się
             <time datetime="{{ event.start_time|date:"c" }}"
                   title="{{ event.start_time|date:"SHORT_DATE_FORMAT" }}">{{ event.start_time|naturaltime }}</time>
-            , kończy się
+            , skończyło się
             <time datetime="{{ event.end_time|date:"c" }}"
                   title="{{ event.end_time|date:"SHORT_DATE_FORMAT" }}">{{ event.end_time|naturaltime }}</time>
           </strong>
           </p>
-          <p>{{ event.description|truncatechars_html:50 }}</p>
+          <p>{{ event.description|truncatechars_html:100 }}</p>
         </li>
       {% endfor %}
     </div>
