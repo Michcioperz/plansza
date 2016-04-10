@@ -18,5 +18,5 @@ def s_friends_in(x: User, y: EventHour):
 
 @register.filter
 def placeholder_avatar(x: User):
-    return "holder.js/150x150?text=" + "".join(
+    return "holder.js/150x150?size=50&random=yes&text=" + "".join(
         [y[0] for y in zip(x.get_full_name().title(), x.get_full_name().lower()) if y[0] != y[1]])
