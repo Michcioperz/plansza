@@ -8,7 +8,7 @@
     <blockquote>{{ event.description }}</blockquote>
   </div>
   <div class="container">
-    <table>
+    <table class="bordered">
       {% for hour in event.serious_hours %}
         <tr>
           <td class="hour1">{% if hour.mtype == "hour" %}
@@ -30,11 +30,11 @@
                   <i class="material-icons">add</i></button>{% endif %}
             </form>{% endif %}</td>
           <td class="hour3">{{ hour.time|time:"H:i" }}</td>
-          <td class="hour4">{% firstof hour.name "" %}
-            <div class="friends">{% for friend in request.user|s_friends_in:hour %}
+          <td class="hour4"><span class="left">{% firstof hour.name "" %}</span>
+            <span class="friends right">{% for friend in request.user|s_friends_in:hour %}
               <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ friend.get_full_name }}">
                 <img class="responsive-img circle" src="{% firstof friend.friend.image friend|placeholder_avatar %}"
-                     alt="{{ friend.get_full_name }}"/></a>{% endfor %}</div>
+                     alt="{{ friend.get_full_name }}"/></a>{% endfor %}</span>
           </td>
         </tr>
       {% endfor %}
