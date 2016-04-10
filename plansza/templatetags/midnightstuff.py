@@ -2,8 +2,6 @@ from django import template
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-from ..models import EventHour
-
 register = template.Library()
 
 
@@ -13,7 +11,7 @@ def belongs_to(x, y):
 
 
 @register.filter
-def s_friends_in(x: User, y: EventHour):
+def s_friends_in(x, y):
     return User.objects.filter(hours=y).filter(Q(friend__friends=x.friend) | Q(pk=x.pk))
 
 
