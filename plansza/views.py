@@ -45,7 +45,7 @@ def change_status(request, ident):
             hour.users.add(request.user)
         if request.POST["action"] == "delete":
             hour.users.remove(request.user)
-    return redirect("event_details", args=(hour.event.facebook_id,))
+    return redirect("event_details", ident=hour.event.facebook_id)
 
 
 @login_required
