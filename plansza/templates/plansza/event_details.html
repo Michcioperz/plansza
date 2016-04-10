@@ -11,7 +11,7 @@
     <table>
       {% for hour in event.serious_hours %}
         <tr>
-          <td>{% if hour.mtype == "hour" %}
+          <td class="hour1">{% if hour.mtype == "hour" %}
             <form method="post" action="{% url "change_status" hour.pk %}">
             {% csrf_token %}
           {% if request.user|belongs_to:hour.users.all %}
@@ -20,7 +20,7 @@
             <button type="submit" name="action" class="btn-floating waves-effect magical-button green" value="put"><i
                 class="material-icons">add</i></button>{% endif %}
             </form>{% endif %}</td>
-          <td>{% if hour.mtype == "hour" %}{{ hour.time|date:"d.m" }}{% else %}
+          <td class="hour2">{% if hour.mtype == "hour" %}{{ hour.time|date:"d.m" }}{% else %}
             <form method="post" action="{% url "change_panel_status" hour.pk %}">
               {% csrf_token %}
               {% if request.user|belongs_to:hour.users.all %}
@@ -29,8 +29,8 @@
                 <button type="submit" name="action" class="btn-floating waves-effect magical-button green" value="put">
                   <i class="material-icons">add</i></button>{% endif %}
             </form>{% endif %}</td>
-          <td>{{ hour.time|time:"H:i" }}</td>
-          <td>{% firstof hour.name "" %}
+          <td class="hour3">{{ hour.time|time:"H:i" }}</td>
+          <td class="hour4">{% firstof hour.name "" %}
             <div class="friends">{% for friend in request.user|s_friends_in:hour %}
               <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ friend.get_full_name }}">
                 <img class="responsive-img circle" src="{% firstof friend.friend.image friend|placeholder_avatar %}"

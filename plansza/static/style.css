@@ -3,8 +3,8 @@
   width: 100%;
 }
 
-.magical-button {
-  margin-right: 1em;
+.hour1.magical-button {
+  margin-left: 2em;
 }
 
 .friends img {
@@ -21,4 +21,8 @@ nav img {
 
 body {
   font-family: "Helvetica Neue", "Lato", "Roboto", sans-serif;
+}
+
+.hour1, .hour2 {
+  width: 100px;
 }
