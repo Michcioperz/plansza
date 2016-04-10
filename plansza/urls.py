@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout_page, name="logout_page"),
     url(r'^$', views.landing_page, name="landing_page"),
     url(r'^h/(?P<ident>\d+)/$', views.change_status, name="change_status"),
+    url(r'^s/(?P<ident>\d+)/$', views.change_panel_status, name="change_panel_status"),
 ]
