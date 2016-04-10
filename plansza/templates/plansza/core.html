@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static "style.css" %}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
-  <title>{% block title %}Poplanszówkujemy{% endblock title %}</title>
+  <title>{% block title %}Jakaś Strona Eventowa{% endblock title %}</title>
   <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
   {% block head %}{% endblock head %}
@@ -17,7 +17,7 @@
 {% block nav %}
   <nav>
     <div class="nav-wrapper">
-      <a class="brand-logo center" href="{% url "landing_page" %}">Poplanszówkujemy</a>
+      <a class="brand-logo center" href="{% url "landing_page" %}">Jakaś Strona Eventowa</a>
       {% if request.user.is_authenticated %}<img class="responsive-img circle right"
                                                  src="{% firstof request.user.friend.image request.user|placeholder_avatar %}"/>{% endif %}
       <ul class="right">
