@@ -7,32 +7,38 @@
     <h1>{{ event.name }}</h1>
     <blockquote>{{ event.description }}</blockquote>
   </div>
-  <div class="container row">
-    {% for hour in event.serious_hours %}
-      <div class="col s12">
-        <div class="card-panel">
-          <div class="friends right">
-            {% for friend in request.user|s_friends_in:hour %}
-              <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ friend.get_full_name }}">
-                <img class="responsive-img circle" src="{% firstof friend.friend.image friend|placeholder_avatar %}"
-                     alt="{{ friend.get_full_name }}"/></a>{% endfor %}
-          </div>
-          <form method="post" action="
-              {% if hour.mtype == "hour" %}{% url "change_status" hour.pk %}{% else %}{% url "change_panel_status" hour.pk %}{% endif %}">
+  <div class="container">
+    <table>
+      {% for hour in event.serious_hours %}
+        <tr>
+          <td>{% if hour.mtype == "hour" %}
+            <form method="post" action="{% url "change_status" hour.pk %}">
             {% csrf_token %}
           {% if request.user|belongs_to:hour.users.all %}
-            <button type="submit" name="action" class="btn-floating waves-effect left magical-button red"
-                    value="delete"><i
+            <button type="submit" name="action" class="btn-floating waves-effect magical-button red" value="delete"><i
                 class="material-icons">remove</i></button>{% else %}
-            <button type="submit" name="action" class="btn-floating waves-effect left magical-button green" value="put">
-              <i
-                  class="material-icons">add</i></button>{% endif %}
-          </form>
-          <p>{% if hour.mtype == "hour" %}{{ hour.time | date:"d.m H:i" }}{% else %}{{ hour.time | time:"H:i" }}
-            {{ hour.name }}{% endif %}</p>
-        </div>
-      </div>
-    {% endfor %}
+            <button type="submit" name="action" class="btn-floating waves-effect magical-button green" value="put"><i
+                class="material-icons">add</i></button>{% endif %}
+            </form>{% endif %}</td>
+          <td>{% if hour.mtype == "hour" %}{{ hour.time|date:"d.m" }}{% else %}
+            <form method="post" action="{% url "change_panel_status" hour.pk %}">
+              {% csrf_token %}
+              {% if request.user|belongs_to:hour.users.all %}
+                <button type="submit" name="action" class="btn-floating waves-effect magical-button red" value="delete">
+                  <i class="material-icons">remove</i></button>{% else %}
+                <button type="submit" name="action" class="btn-floating waves-effect magical-button green" value="put">
+                  <i class="material-icons">add</i></button>{% endif %}
+            </form>{% endif %}</td>
+          <td>{{ hour.time|time:"H:i" }}</td>
+          <td>{% firstof hour.name "" %}
+            <div class="friends">{% for friend in request.user|s_friends_in:hour %}
+              <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ friend.get_full_name }}">
+                <img class="responsive-img circle" src="{% firstof friend.friend.image friend|placeholder_avatar %}"
+                     alt="{{ friend.get_full_name }}"/></a>{% endfor %}</div>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.3/holder.min.js"></script>
 {% endblock body %}
