@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^e/(?P<ident>\d+)/$', views.event_details, name="event_details"),
     url(r'^logout/$', views.logout_page, name="logout_page"),
     url(r'^$', views.landing_page, name="landing_page"),
+    url(r'^h/(?P<ident>\d+)/$', views.change_status, name="change_status"),
 ]
