@@ -2,3 +2,7 @@
   text-shadow: 2px 2px 0.5em black, -2px 2px 0.5em black, 2px -2px 0.5em black, -2px -2px 0.5em black;
   width: 100%;
 }
+
+.magical-button {
+  margin-right: 1em;
+}
