@@ -1,3 +1,5 @@
+from operator import attrgetter
+
 import arrow
 import requests
 from django.contrib.auth import user_logged_in
@@ -25,13 +27,26 @@ class Event(models.Model):
     hidden = models.BooleanField(default=False)
 
     def serious_hours(self):
-        return self.hours.order_by("time")
+        return sorted(list(self.hours) + list(self.subevents), key=attrgetter("time"))
 
 
 class EventHour(models.Model):
+    mtype = "hour"
     event = models.ForeignKey(Event, related_name="hours")
     users = models.ManyToManyField(User, related_name="hours", blank=True)
     time = models.DateTimeField()
+
+
+class Subevent(models.Model):
+    mtype = "panel"
+    event = models.ForeignKey(Event, related_name="subevents")
+    users = models.ManyToManyField(User, related_name="subevents", blank=True)
+    time = models.DateTimeField()
+    name = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Friend(models.Model):
