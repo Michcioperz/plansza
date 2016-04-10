@@ -12,14 +12,14 @@
               <span class="card-title truncate">{{ event.name }}</span>
             </div>
             <div class="card-content">
-              <p class="flow-text">zaczęło się
+              <strong>zaczęło się
                 <time datetime="{{ event.start_time|date:"c" }}"
                       title="{{ event.start_time|date:"SHORT_DATE_FORMAT" }}">{{ event.start_time|naturaltime }}</time>
-              </p>
-              <p class="flow-text">kończy się
+              </strong>
+              <strong>kończy się
                 <time datetime="{{ event.end_time|date:"c" }}"
                       title="{{ event.end_time|date:"SHORT_DATE_FORMAT" }}">{{ event.end_time|naturaltime }}</time>
-              </p>
+              </strong>
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
@@ -39,10 +39,10 @@
               <span class="card-title truncate">{{ event.name }}</span>
             </div>
             <div class="card-content">
-              <p class="flow-text">zaczyna się
+              <strong>zaczyna się
                 <time datetime="{{ event.start_time|date:"c" }}"
                       title="{{ event.start_time|date:"SHORT_DATE_FORMAT" }}">{{ event.start_time|naturaltime }}</time>
-              </p>
+              </strong>
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
@@ -58,12 +58,13 @@
         <li class="collection-item avatar">
           <img src="{{ event.image }}" class="circle"/>
           <a class="title" href="{% url "event_details" event.facebook_id %}">{{ event.name }}</a>
-          <p>zaczyna się
+          <p><strong>zaczyna się
             <time datetime="{{ event.start_time|date:"c" }}"
                   title="{{ event.start_time|date:"SHORT_DATE_FORMAT" }}">{{ event.start_time|naturaltime }}</time>
             , kończy się
             <time datetime="{{ event.end_time|date:"c" }}"
                   title="{{ event.end_time|date:"SHORT_DATE_FORMAT" }}">{{ event.end_time|naturaltime }}</time>
+          </strong>
           </p>
           <p>{{ event.description }}</p>
         </li>
