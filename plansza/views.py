@@ -1,14 +1,14 @@
 import arrow
 import requests
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import logout, decorators
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
 from .models import Event
 from .utils import get_graph
 
 
-@login_required
+@decorators.login_required
 def list_events(request):
     events = []
     eloader = get_graph(request.user).get_connections(id="me", connection_name="events")
@@ -29,7 +29,12 @@ def list_events(request):
                    "ongoing": allev.filter(start_time__lte=timezone.now(), end_time__gte=timezone.now())})
 
 
-@login_required
+def logout_page(request):
+    logout(request)
+    return redirect("landing_page")
+
+
+@decorators.login_required
 def event_details(request, ident: str):
     ensure_event_import(get_graph(request.user), ident)
     event = get_object_or_404(Event, facebook_id=int(ident))

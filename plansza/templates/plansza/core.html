@@ -17,6 +17,12 @@
   <nav>
     <div class="nav-wrapper">
       <a class="brand-logo center" href="{% url "landing_page" %}">Poplanszówkujemy</a>
+      <ul class="right">
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url "logout_page" %}">Wyloguj się</a></li>{% endif %}
+        {% if request.user.is_staff %}
+          <li><a href="{% url "admin:index" %}">Panel administracyjny</a></li>{% endif %}
+      </ul>
     </div>
   </nav>
 {% endblock nav %}
