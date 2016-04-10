@@ -11,6 +11,11 @@
     {% for hour in event.serious_hours %}
       <div class="col s12 m6 l4">
         <div class="card-panel">
+          <div class="friends right">
+            {% for friend in request.user|s_friends_in:hour %}
+              <img class="responsive-img" src="{% firstof friend.friend.image friend|placeholder_avatar %}"
+                   alt="{{ friend.get_full_name }}"/>{% endfor %}
+          </div>
           <form method="post" action="{% url "change_status" hour.pk %}">
             {% csrf_token %}
           {% if request.user|belongs_to:hour.users.all %}
@@ -22,11 +27,6 @@
                   class="material-icons">add</i></button>{% endif %}
           </form>
           <p>{{ hour.time | date:"d.m H:i" }}</p>
-          <div class="friends right chip">
-            {% for friend in request.user|s_friends_in:hour %}
-              <img class="responsive-img" src="{% firstof friend.friend.image friend|placeholder_avatar %}"
-                   alt="{{ friend.get_full_name }}"/>{% endfor %}
-          </div>
         </div>
       </div>
     {% endfor %}
