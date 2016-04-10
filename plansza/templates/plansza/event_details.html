@@ -16,7 +16,7 @@
             <a class="btn-floating waves-effect left green"><i class="material-icons">add</i></a>{% endif %}
           <p>{{ hour.time | date:"d.m H:i" }}</p>
           <div class="friends right">
-            {# FIXME #}
+            {% for friend in request.user|s_friends_in:hour %}{{ friend.username }}{% endfor %}
           </div>
         </div>
       </div>
