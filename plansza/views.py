@@ -1,14 +1,16 @@
 import arrow
 import requests
-from django.contrib.auth import logout, decorators
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
-from .models import Event
+from .models import Event, EventHour
 from .utils import get_graph
 
 
-@decorators.login_required
+@login_required
 def list_events(request):
     events = []
     eloader = get_graph(request.user).get_connections(id="me", connection_name="events")
@@ -34,7 +36,19 @@ def logout_page(request):
     return redirect("landing_page")
 
 
-@decorators.login_required
+@require_POST
+@login_required
+def change_status(request, ident):
+    hour = get_object_or_404(EventHour, pk=int(ident))
+    if "action" in request.POST:
+        if request.POST["action"] == "put":
+            hour.users.add(request.user)
+        if request.POST["action"] == "delete":
+            hour.users.remove(request.user)
+    return redirect("event_details", args=(hour.event.facebook_id,))
+
+
+@login_required
 def event_details(request, ident: str):
     ensure_event_import(get_graph(request.user), ident)
     event = get_object_or_404(Event, facebook_id=int(ident))

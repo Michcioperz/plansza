@@ -14,10 +14,12 @@
           <form method="post" action="{% url "change_status" hour.pk %}">
             {% csrf_token %}
           {% if request.user|belongs_to:hour.users.all %}
-            <a class="btn-floating waves-effect left magical-button red"><i
-                class="material-icons">remove</i></a>{% else %}
-            <a class="btn-floating waves-effect left magical-button green"><i
-                class="material-icons">add</i></a>{% endif %}
+            <button type="submit" name="action" class="btn-floating waves-effect left magical-button red"
+                    value="delete"><i
+                class="material-icons">remove</i></button>{% else %}
+            <button type="submit" name="action" class="btn-floating waves-effect left magical-button green" value="put">
+              <i
+                  class="material-icons">add</i></button>{% endif %}
           </form>
           <p>{{ hour.time | date:"d.m H:i" }}</p>
           <div class="friends right chip">
