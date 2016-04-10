@@ -12,7 +12,8 @@
               <span class="card-title truncate">{{ event.name }}</span>
             </div>
             <div class="card-content">
-              <p>kończy się {{ event.end_time|naturaltime }}</p>
+              <h6>zaczęło się {{ event.start_time|naturaltime }}</h6>
+              <h6>kończy się {{ event.end_time|naturaltime }}</h6>
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
@@ -32,6 +33,7 @@
               <span class="card-title truncate">{{ event.name }}</span>
             </div>
             <div class="card-content">
+              <h6>zaczyna się {{ event.start_time|date:"SHORT_DATE_FORMAT" }} {{ event.start_time|naturaltime }}</h6>
               <p>{{ event.description | truncatewords_html:50 }}</p>
             </div>
             <div class="card-action">
