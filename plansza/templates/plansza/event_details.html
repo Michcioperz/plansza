@@ -13,8 +13,9 @@
         <div class="card-panel">
           <div class="friends right">
             {% for friend in request.user|s_friends_in:hour %}
+              <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ friend.get_full_name }}">
               <img class="responsive-img" src="{% firstof friend.friend.image friend|placeholder_avatar %}"
-                   alt="{{ friend.get_full_name }}"/>{% endfor %}
+                   alt="{{ friend.get_full_name }}"/></a>{% endfor %}
           </div>
           <form method="post" action="
               {% if hour.mtype == "hour" %}{% url "change_status" hour.pk %}{% else %}{% url "change_panel_status" hour.pk %}{% endif %}">
