@@ -15,8 +15,7 @@
               <strong>zaczęło się
                 <time datetime="{{ event.start_time|date:"c" }}"
                       title="{{ event.start_time|date:"SHORT_DATE_FORMAT" }}">{{ event.start_time|naturaltime }}</time>
-              </strong>
-              <strong>kończy się
+                | kończy się
                 <time datetime="{{ event.end_time|date:"c" }}"
                       title="{{ event.end_time|date:"SHORT_DATE_FORMAT" }}">{{ event.end_time|naturaltime }}</time>
               </strong>
@@ -63,7 +62,7 @@
           <p><strong>zaczęło się
             <time datetime="{{ event.start_time|date:"c" }}"
                   title="{{ event.start_time|date:"SHORT_DATE_FORMAT" }}">{{ event.start_time|naturaltime }}</time>
-            , skończyło się
+            | skończyło się
             <time datetime="{{ event.end_time|date:"c" }}"
                   title="{{ event.end_time|date:"SHORT_DATE_FORMAT" }}">{{ event.end_time|naturaltime }}</time>
           </strong>
