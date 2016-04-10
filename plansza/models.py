@@ -27,7 +27,7 @@ class Event(models.Model):
     hidden = models.BooleanField(default=False)
 
     def serious_hours(self):
-        return sorted(list(self.hours) + list(self.subevents), key=attrgetter("time"))
+        return sorted(list(self.hours.all()) + list(self.subevents.all()), key=attrgetter("time"))
 
 
 class EventHour(models.Model):
