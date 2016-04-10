@@ -26,6 +26,9 @@ class Event(models.Model):
     end_time = models.DateTimeField()
     hidden = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.name
+
     def serious_hours(self):
         return sorted(list(self.hours.all()) + list(self.subevents.all()), key=attrgetter("time"))
 
